@@ -1,6 +1,6 @@
 # JokerCore
 A cool little project that guesses your cmd, or word. Play around with the filter algorithm constants. 
-##Terms
+##Terms of Use
 Please don't steal and use this for anything that is not opensource. Modules can be used if the project is opensource. 
 ##Algorithm Explanation:
 <ol><b>Terms to know:</b>
