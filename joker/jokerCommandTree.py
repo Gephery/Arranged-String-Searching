@@ -81,12 +81,8 @@ class JokerCommandTree:
         right = node.right
         left = node.left
         if not adding:
-            same_val = input_sort_value is node.value
-            right_spot = False
-            if right is not None:
-                right_spot = find_percent_dif(right.value, input_sort_value) <= percent_range or \
-                             find_percent_dif(input_sort_value, left.value) <= percent_range
-            if same_val or right_spot:
+            similar_val = find_percent_dif(node.value, input_sort_value) <= percent_range
+            if similar_val:
                 JokerCommandTree._find_similar_net(input_sort_value,
                                                    node, percent_range,
                                                    look_range,
@@ -118,4 +114,4 @@ class JokerCommandTree:
 
 
 def find_percent_dif(num1, num2):
-    return abs((num1 - num2) / num1 * 100)
+    return abs((num1 - num2) / num1 * 100.0)
