@@ -1,6 +1,6 @@
-from joker.jokerCommandNode import sortable_score, JokerCommandNode
-from joker.jokerCommandTree import JokerCommandTree
-from joker.jokerUtil import filter_and_pick_joker, word_dic_net, filter_and_pick_joker_str
+from stringSearching.arrangedStringNode import sortable_score_basic
+from stringSearching.arrangedStringTree import ArrangedStringTree
+from stringSearching.arrangedUtil import filter_and_pick_joker, word_dic_net, filter_and_pick_joker_str
 from sys import setrecursionlimit
 from time import time
 
@@ -30,7 +30,7 @@ def leave():
 
 
 def main():
-    cmd_tree = JokerCommandTree()
+    cmd_tree = ArrangedStringTree()
     cmd_reference = get_joker_cmds()
     for cmd in cmd_reference.keys():
         if cmd is not None:
@@ -40,14 +40,14 @@ def main():
 
     while in_cmd is not exit_cmd_s:
         s_cmd = input("Welcome! Please enter a command, peasant. ")
-        net = cmd_tree.find_similar_net(s_cmd, 20.0, -1)
+        net = cmd_tree.cast_net(s_cmd, 20.0, -1)
         in_cmd = filter_and_pick_joker(s_cmd, net)
         cmd_reference[in_cmd]()
 
 
 def diction():
     setrecursionlimit(150000)
-    word_tree = JokerCommandTree()
+    word_tree = ArrangedStringTree()
     start_time = time() * 1000
     word_reference = word_list()
     length = len(word_reference)
@@ -70,7 +70,7 @@ def diction():
 
     while in_word is not "leave":
         s_cmd = input("Try and spell a word, and I will guess what it is. ")
-        net = word_tree.find_similar_net(s_cmd, 0, 2)
+        net = word_tree.cast_net(s_cmd, 0, 2)
         in_word = filter_and_pick_joker(s_cmd, net)
         print("Are you trying to spell " + in_word + "?")
 
@@ -83,7 +83,7 @@ def diction_with_dic():
     for word in word_reference:
         temp_time = time() * 1000
         if word is not None:
-            temp_score = sortable_score(word.lower())
+            temp_score = sortable_score_basic(word.lower())
             if word_dic.get(temp_score) is None:
                 word_dic[temp_score] = [word.lower()]
             else:
