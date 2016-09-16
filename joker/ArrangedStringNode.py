@@ -1,6 +1,9 @@
 
 
 class JokerCommandNode:
+    """Joker nodes are the
+
+    """
     def __init__(self, cmd="", value=None, right=None, left=None):
         self.cmd = cmd
         if value is None:
